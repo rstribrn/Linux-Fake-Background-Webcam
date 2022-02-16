@@ -1,17 +1,16 @@
 FROM python:3.8
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
       python3-numpy \
       python3-opencv \
-      python3-requests \
-      && rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+      python3-requests
+RUN apt-get install -y ffmpeg libsm6 libxext6
+RUN rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 WORKDIR /src
 
-COPY foreground.jpg \
-    foreground-mask.png \
-    background.jpg \
+COPY background.jpg \
     fake.py \
     requirements.txt \
     /src/
